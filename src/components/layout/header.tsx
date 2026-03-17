@@ -483,7 +483,13 @@ function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
 export function Header() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    return window.scrollY > 20;
+  });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
@@ -497,17 +503,9 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    // Set initial state
-    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-    setOpenDropdown(null);
-  }, [pathname]);
 
   // Close dropdowns on Escape key
   useEffect(() => {
