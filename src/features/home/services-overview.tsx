@@ -81,18 +81,38 @@ function ServicesOverview() {
           align="center"
         />
 
-        <StaggerContainer className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service) => (
-            <StaggerItem key={service.slug}>
-              <FeatureCard
-                icon={service.icon}
-                title={service.title}
-                description={service.description}
-                href={`/services/${service.slug}`}
-              />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
+          {services.map((service, i) => {
+            const { iconMap } = require("@/components/shared/feature-card");
+            const IconComponent = iconMap[service.icon];
+
+            return (
+              <StaggerItem key={service.slug}>
+                <Link href={`/services/${service.slug}`}>
+                  <div className="group flex items-center gap-3 rounded-xl border border-surface-border bg-white p-4 shadow-sm transition-all hover:border-brand-blue/30 hover:shadow-md hover:-translate-y-0.5">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-brand-blue-pale text-brand-blue transition-colors group-hover:bg-brand-blue group-hover:text-white">
+                      {IconComponent ? (
+                        <IconComponent className="h-5 w-5" aria-hidden="true" />
+                      ) : (
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" />
+                        </svg>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-bold text-text-primary group-hover:text-brand-blue transition-colors">
+                        {service.title}
+                      </p>
+                      <span className="text-[10px] font-semibold text-brand-teal uppercase tracking-wider">
+                        Workspace
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </StaggerItem>
+            );
+          })}
+        </div>
 
         <div className="mt-12 flex justify-center">
           <Button size="lg" variant="secondary" asChild>

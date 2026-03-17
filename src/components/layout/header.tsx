@@ -4,11 +4,9 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import {
-  mainNavItems,
-  ctaButton,
-} from "@/config/navigation";
+import { mainNavItems, ctaButton } from "@/config/navigation";
 import type { NavItem } from "@/types";
+import { useLayoutMode } from "./layout-provider";
 
 // ---------------------------------------------------------------------------
 // Icon components (inline SVGs to avoid external dependency for layout)
@@ -93,7 +91,7 @@ function ArrowRightIcon({ className }: { className?: string }) {
 // Logo component
 // ---------------------------------------------------------------------------
 
-function Logo({ scrolled }: { scrolled: boolean }) {
+function Logo({ scrolled, isDarkBg }: { scrolled: boolean; isDarkBg?: boolean }) {
   return (
     <Link
       href="/"
@@ -104,7 +102,7 @@ function Logo({ scrolled }: { scrolled: boolean }) {
         <span
           className={cn(
             "transition-colors duration-300",
-            scrolled ? "text-brand-navy" : "text-brand-navy"
+            isDarkBg ? "text-white" : "text-brand-navy"
           )}
         >
           TECHINC
@@ -112,7 +110,7 @@ function Logo({ scrolled }: { scrolled: boolean }) {
         <span
           className={cn(
             "font-extrabold transition-colors duration-300",
-            scrolled ? "text-brand-blue" : "text-brand-blue"
+            isDarkBg ? "text-brand-teal" : "text-brand-blue"
           )}
         >
           GLOBAL
@@ -133,6 +131,7 @@ interface DesktopDropdownProps {
   onOpen: () => void;
   onClose: () => void;
   scrolled: boolean;
+  isDarkBg?: boolean;
 }
 
 function DesktopDropdown({
@@ -142,6 +141,7 @@ function DesktopDropdown({
   onOpen,
   onClose,
   scrolled,
+  isDarkBg,
 }: DesktopDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -194,7 +194,9 @@ function DesktopDropdown({
             ? "text-brand-blue"
             : scrolled
               ? "text-text-secondary hover:text-brand-blue"
-              : "text-text-secondary hover:text-brand-blue"
+              : isDarkBg
+                ? "text-white/90 hover:text-white"
+                : "text-text-secondary hover:text-brand-blue"
         )}
         onClick={() => (isOpen ? onClose() : onOpen())}
         onKeyDown={handleKeyDown}
@@ -268,9 +270,10 @@ interface DesktopNavLinkProps {
   item: NavItem;
   isActive: boolean;
   scrolled: boolean;
+  isDarkBg?: boolean;
 }
 
-function DesktopNavLink({ item, isActive, scrolled }: DesktopNavLinkProps) {
+function DesktopNavLink({ item, isActive, scrolled, isDarkBg }: DesktopNavLinkProps) {
   return (
     <Link
       href={item.href}
@@ -281,7 +284,9 @@ function DesktopNavLink({ item, isActive, scrolled }: DesktopNavLinkProps) {
           ? "text-brand-blue"
           : scrolled
             ? "text-text-secondary hover:text-brand-blue"
-            : "text-text-secondary hover:text-brand-blue"
+            : isDarkBg
+              ? "text-white/90 hover:text-white"
+              : "text-text-secondary hover:text-brand-blue"
       )}
     >
       {item.label}
@@ -481,6 +486,10 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
+  const { viewMode, setViewMode } = useLayoutMode();
+
+  const isDarkBg = !scrolled && (pathname === "/" || pathname === "/frappe" || pathname === "/erpnext");
+
   // Track scroll position for header background transition
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 20);
@@ -532,7 +541,7 @@ export function Header() {
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-18 sm:px-6 lg:h-20 lg:px-8">
           {/* Logo */}
-          <Logo scrolled={scrolled} />
+          <Logo scrolled={scrolled} isDarkBg={isDarkBg} />
 
           {/* Desktop navigation */}
           <nav
@@ -557,6 +566,7 @@ export function Header() {
                     onOpen={() => setOpenDropdown(item.label)}
                     onClose={() => setOpenDropdown(null)}
                     scrolled={scrolled}
+                    isDarkBg={isDarkBg}
                   />
                 );
               }
@@ -567,6 +577,7 @@ export function Header() {
                   item={item}
                   isActive={isActive}
                   scrolled={scrolled}
+                  isDarkBg={isDarkBg}
                 />
               );
             })}
@@ -574,6 +585,23 @@ export function Header() {
 
           {/* Right section: CTA + Mobile toggle */}
           <div className="flex items-center gap-3">
+            {/* Workspace Toggle */}
+            <button
+              type="button"
+              onClick={() => setViewMode(viewMode === "top" ? "sidebar" : "top")}
+              className={cn(
+                "hidden lg:inline-flex items-center justify-center rounded-lg p-2 transition-all duration-200",
+                isDarkBg
+                  ? "text-white/80 hover:bg-white/10 hover:text-white"
+                  : "text-text-secondary hover:bg-surface-muted hover:text-text-primary"
+              )}
+              title={viewMode === "top" ? "Switch to Sidebar Workspace" : "Switch to Top Navbar"}
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </button>
+
             {/* Desktop CTA button */}
             <Link
               href={ctaButton.href}
@@ -617,7 +645,7 @@ export function Header() {
       />
 
       {/* Spacer to offset fixed header height */}
-      <div className="h-16 sm:h-18 lg:h-20" aria-hidden="true" />
+      {!isDarkBg && <div className="h-16 sm:h-18 lg:h-20" aria-hidden="true" />}
     </>
   );
 }

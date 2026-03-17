@@ -45,6 +45,16 @@ export const industries: Industry[] = [
       'Gain accurate product costing with real-time tracking of material, labor, and overhead',
       'Improve on-time delivery performance with live production dashboards and exception alerts',
     ],
+    keyModules: ['Production', 'Quality', 'Inventory', 'Maintenance'],
+    stats: [
+      { value: "25-40%", label: "Lead Time Reduction" },
+      { value: "15-20%", label: "Inventory Cost Savings" },
+    ],
+    timeline: [
+      { step: "Phase 1", label: "Core Foundation", description: "Standardize Bill of Materials (BOM), item masters, and raw material inventory workflows." },
+      { step: "Phase 2", label: "Production Control", description: "Enable Material Requirements Planning (MRP), workstations, and live job cards." },
+      { step: "Phase 3", label: "Quality & Costing", description: "Activate automated QMS checklist checkpoints and real-time machine absorption costing." }
+    ],
     metaTitle: 'ERPNext for Manufacturing | TECHINCGLOBAL',
     metaDescription:
       'ERPNext manufacturing solutions for production planning, BOM management, quality control, and shop-floor tracking. Reduce lead times and improve delivery performance.',
@@ -88,6 +98,16 @@ export const industries: Industry[] = [
       'Optimize delivery routes and fleet utilization to lower transportation costs',
       'Improve customer satisfaction with real-time delivery tracking and automated notifications',
       'Scale to new warehouses and distribution centers without adding administrative overhead',
+    ],
+    keyModules: ['Multi-Warehouse', 'Automated Fulfillment', 'Fleet Management', '3PL Connectors'],
+    stats: [
+      { value: "99%+", label: "Inventory Accuracy" },
+      { value: "40-60%", label: "Faster Cycle Time" },
+    ],
+    timeline: [
+      { step: "Phase 1", label: "Supply Chain Base", description: "Unify multi-warehouse tracking, batch control, and barcode-driven receiving workflows." },
+      { step: "Phase 2", label: "Fulfillment Sync", description: "Automate wave picking schedules, container assignment, and proof-of-delivery syncs." },
+      { step: "Phase 3", label: "Insights & Fleet", description: "Deploy 3PL connectors and strategic predictive restock alert automation." }
     ],
     metaTitle: 'ERPNext for Distribution & Logistics | TECHINCGLOBAL',
     metaDescription:
@@ -133,6 +153,16 @@ export const industries: Industry[] = [
       'Accelerate month-end closing with automated sales and payment reconciliation',
       'Scale from a single store to a multi-location retail chain on one platform',
     ],
+    keyModules: ['Omnichannel POS', 'E-Commerce Sync', 'Loyalty Engine', 'Auto-Reconciliation'],
+    stats: [
+      { value: "30-50%", label: "Stockout Reduction" },
+      { value: "15-20%", label: "Loyalty Revenue Boost" },
+    ],
+    timeline: [
+      { step: "Phase 1", label: "Unified Catalog", description: "Consolidate pricing rules, taxes, and omnichannel master inventory lists." },
+      { step: "Phase 2", label: "POS & Sales Connect", description: "Deploy localized online/offline POS checkouts with auto-reconciliations." },
+      { step: "Phase 3", label: "Growth Engines", description: "Enable point-based loyalty tiers and targeted CRM automated promotions." }
+    ],
     metaTitle: 'ERPNext for Retail & E-Commerce | TECHINCGLOBAL',
     metaDescription:
       'Omnichannel retail ERP with integrated POS, e-commerce sync, loyalty programs, and multi-store inventory management. Unify your retail operations with ERPNext.',
@@ -176,6 +206,16 @@ export const industries: Industry[] = [
       'Accelerate invoicing from weeks to days with automated timesheet-to-invoice workflows',
       'Make data-driven staffing decisions with utilization dashboards and demand forecasts',
       'Deliver a better client experience with project portals, milestone tracking, and transparent billing',
+    ],
+    keyModules: ['Project Accounting', 'Resource Management', 'Time Tracking', 'Automated Billing'],
+    stats: [
+      { value: "15-25%", label: "Margin Improvement" },
+      { value: "60%", label: "Faster Invoicing Cycles" },
+    ],
+    timeline: [
+      { step: "Phase 1", label: "Workspace Portals", description: "Design structure for timesheets, project budgets, and accurate allocation grids." },
+      { step: "Phase 2", label: "Milestones Tracking", description: "Unify invoicing schedules to automatically sync deliverables to accounting modules." },
+      { step: "Phase 3", label: "Analytics Engine", description: "Dashboard layouts for absolute early warnings on erosion margins." }
     ],
     metaTitle: 'ERPNext for Professional Services | TECHINCGLOBAL',
     metaDescription:
@@ -221,6 +261,16 @@ export const industries: Industry[] = [
       'Improve cash flow management with milestone billing automation and retention tracking',
       'Gain a consolidated view of profitability across all active projects and properties',
     ],
+    keyModules: ['Cost Tracking', 'Subcontracting Management', 'Asset Tracking', 'Milestone Billing'],
+    stats: [
+      { value: "20-35%", label: "Cost Overrun Reduction" },
+      { value: "35%", label: "Faster Period Close" },
+    ],
+    timeline: [
+      { step: "Phase 1", label: "Budget discipline", description: "Establish standard cost-center budgets and sub-contractor certification rules." },
+      { step: "Phase 2", label: "Asset Deployment", description: "Track location, downtime logs, and schedules of large fleets across sites." },
+      { step: "Phase 3", label: "Retention Sync", description: "Deploy milestone billing with auto-retention triggers and claim schedules." }
+    ],
     metaTitle: 'ERPNext for Construction & Real Estate | TECHINCGLOBAL',
     metaDescription:
       'Construction and real estate ERP solutions for project costing, subcontractor management, asset tracking, and milestone billing. Control costs and deliver on schedule.',
@@ -264,6 +314,16 @@ export const industries: Industry[] = [
       'Accelerate revenue collection with automated billing and insurance claim processing',
       'Achieve compliance readiness with built-in audit trails, access controls, and data encryption',
       'Enhance patient experience with appointment scheduling, reminders, and self-service portals',
+    ],
+    keyModules: ['Electronic Records', 'Pharmacy Management', 'Clinical Billing', 'Audit Trails'],
+    stats: [
+      { value: "20-40%", label: "Pharmacy Waste Savings" },
+      { value: "30%", label: "Administrative Load Saved" },
+    ],
+    timeline: [
+      { step: "Phase 1", label: "EHR Backbone", description: "Index unified patient profile catalogs, appointment workflows, and prescriptions." },
+      { step: "Phase 2", label: "Cycle Management", description: "Deploy FIFO pharmaceutical allocation batches with triggers for expiring loads." },
+      { step: "Phase 3", label: "Disbursement Sync", description: "Automate itemized encounters synced to insurance claims approvals." }
     ],
     metaTitle: 'ERPNext for Healthcare | TECHINCGLOBAL',
     metaDescription:
@@ -309,6 +369,16 @@ export const industries: Industry[] = [
       'Make data-driven decisions with dashboards covering enrollment, finances, and academic performance',
       'Scale from a single institution to a multi-campus group on a unified platform',
     ],
+    keyModules: ['Student Lifecycle', 'Fee Management', 'Academic Planning', 'Parent Portals'],
+    stats: [
+      { value: "40-50%", label: "Paperwork Load Reduction" },
+      { value: "25%", label: "Higher Fee Recovery Rate" },
+    ],
+    timeline: [
+      { step: "Phase 1", label: "Records Control", description: "Enroll student lifecycle profiles, fee structures, and installment frameworks." },
+      { step: "Phase 2", label: "Academics Desk", description: "Generate automated report cards, timetables maps, and assessment rubrics." },
+      { step: "Phase 3", label: "Folk Gateways", description: "Enable continuous collection online processing with threshold metrics dashboards." }
+    ],
     metaTitle: 'ERPNext for Education | TECHINCGLOBAL',
     metaDescription:
       'Education ERP for student management, fee collection, academic planning, and institutional administration. Streamline operations and improve student outcomes with ERPNext.',
@@ -352,6 +422,16 @@ export const industries: Industry[] = [
       'Reduce customs clearance delays with pre-configured document templates and compliance checks',
       'Improve supplier negotiation with complete visibility into historical pricing, lead times, and quality metrics',
       'Accelerate month-end closing with automated foreign currency revaluation and gain/loss posting',
+    ],
+    keyModules: ['Multi-currency', 'Landed Cost Tracking', 'LC Management', 'Compliance Templates'],
+    stats: [
+      { value: "100%", label: "FX Accounting Accuracy" },
+      { value: "3-5 Days", label: "Faster Freight Clearing" },
+    ],
+    timeline: [
+      { step: "Phase 1", label: "Trade Control", description: "Set standard multicurrency ledger revaluation controls and item pricing grids." },
+      { step: "Phase 2", label: "Landed Cost Sync", description: "Automate duty/freight distribution absorption triggers per item receipts." },
+      { step: "Phase 3", label: "Finance Portals", description: "Assign automated threshold alerts for LC documentation and guarantees." }
     ],
     metaTitle: 'ERPNext for Trading & Import/Export | TECHINCGLOBAL',
     metaDescription:

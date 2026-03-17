@@ -12,9 +12,10 @@ interface BreadcrumbItem {
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
   className?: string;
+  dark?: boolean;
 }
 
-function Breadcrumbs({ items, className }: BreadcrumbsProps) {
+function Breadcrumbs({ items, className, dark }: BreadcrumbsProps) {
   // Generate BreadcrumbList structured data
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -37,7 +38,10 @@ function Breadcrumbs({ items, className }: BreadcrumbsProps) {
             <li key={index} className="flex items-center gap-1">
               {index > 0 && (
                 <ChevronRight
-                  className="h-3.5 w-3.5 shrink-0 text-text-muted"
+                  className={cn(
+                    "h-3.5 w-3.5 shrink-0",
+                    dark ? "text-white/40" : "text-text-muted"
+                  )}
                   aria-hidden="true"
                 />
               )}
@@ -45,7 +49,9 @@ function Breadcrumbs({ items, className }: BreadcrumbsProps) {
                 <span
                   className={cn(
                     "font-medium",
-                    isLast ? "text-text-primary" : "text-text-muted"
+                    isLast
+                      ? (dark ? "text-white" : "text-text-primary")
+                      : (dark ? "text-white/70" : "text-text-muted")
                   )}
                   aria-current={isLast ? "page" : undefined}
                 >
@@ -54,7 +60,12 @@ function Breadcrumbs({ items, className }: BreadcrumbsProps) {
               ) : (
                 <Link
                   href={item.href}
-                  className="text-text-muted transition-colors hover:text-brand-blue"
+                  className={cn(
+                    "transition-colors",
+                    dark
+                      ? "text-white/70 hover:text-white"
+                      : "text-text-muted hover:text-brand-blue"
+                  )}
                 >
                   {item.label}
                 </Link>

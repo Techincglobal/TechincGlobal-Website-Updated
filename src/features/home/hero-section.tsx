@@ -74,19 +74,49 @@ function HeroSection() {
               with guaranteed adoption.
             </p>
 
-            {/* CTAs */}
-            <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Button size="xl" asChild>
-                <Link href="/contact">Book Free Consultation</Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="xl"
-                className="border-white/20 bg-white/5 text-text-inverse hover:bg-white/10 hover:text-text-inverse"
-                asChild
-              >
-                <Link href="/assessment">Take ERP Assessment</Link>
-              </Button>
+            {/* CTAs & Workspace Portal Search */}
+            <div className="mt-10 mx-auto w-full max-w-xl">
+              <div className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 p-1.5 backdrop-blur-md shadow-2xl">
+                <div className="flex flex-1 items-center gap-3 px-4">
+                  <svg
+                    className="h-5 w-5 text-brand-teal/80 flex-shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <input
+                    type="text"
+                    placeholder="Search for inventory, manufacturing, accounting..."
+                    className="bg-transparent text-sm text-white placeholder-white/40 outline-none w-full"
+                    disabled
+                  />
+                </div>
+                <Button size="lg" className="rounded-xl sm:px-5" asChild>
+                  <Link href="/contact">Book Consultation</Link>
+                </Button>
+              </div>
+
+              {/* Suggestion Tags */}
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-xs text-text-inverse/60">
+                <span className="font-medium">Suggestions:</span>
+                {[
+                  { label: "Manufacturing", href: "/industries/manufacturing" },
+                  { label: "Inventory", href: "/services" },
+                  { label: "Custom App", href: "/services" },
+                  { label: "Frappe", href: "/services" }
+                ].map((tag) => (
+                  <Link
+                    key={tag.label}
+                    href={tag.href}
+                    className="rounded-full bg-white/5 border border-white/10 px-2.5 py-1 hover:bg-white/10 hover:text-text-inverse hover:border-white/20 transition-all font-medium"
+                  >
+                    {tag.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </FadeUp>
 

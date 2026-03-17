@@ -116,6 +116,14 @@ export const mainNavItems: NavItem[] = [
     href: "/",
   },
   {
+    label: "Platforms",
+    href: "#",
+    children: [
+      { label: "ERPNext", href: "/erpnext" },
+      { label: "Frappe Framework", href: "/frappe" },
+    ],
+  },
+  {
     label: "Services",
     href: "/services",
     children: serviceItems.map(({ label, href }) => ({ label, href })),
@@ -126,12 +134,14 @@ export const mainNavItems: NavItem[] = [
     children: industryItems.map(({ label, href }) => ({ label, href })),
   },
   {
-    label: "Methodology",
-    href: "/methodology",
-  },
-  {
-    label: "Assessment",
-    href: "/assessment",
+    label: "Company",
+    href: "#",
+    children: [
+      { label: "About Us", href: "/about" },
+      { label: "Methodology", href: "/methodology" },
+      { label: "Assessment", href: "/assessment" },
+      { label: "Contact", href: "/contact" },
+    ],
   },
   {
     label: "Resources",
@@ -141,14 +151,6 @@ export const mainNavItems: NavItem[] = [
       { label: "Case Studies", href: "/case-studies" },
       { label: "Resources", href: "/resources" },
     ],
-  },
-  {
-    label: "About",
-    href: "/about",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
   },
 ];
 
