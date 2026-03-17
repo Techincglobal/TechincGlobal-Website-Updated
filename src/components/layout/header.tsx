@@ -163,7 +163,8 @@ function DesktopDropdown({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      isOpen ? onClose() : onOpen();
+      if (isOpen) onClose();
+      else onOpen();
     }
     if (e.key === "Escape") {
       onClose();

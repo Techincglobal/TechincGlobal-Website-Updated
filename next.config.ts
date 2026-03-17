@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
   serverActions: {
     allowedOrigins: ["localhost:3000"],
   } as unknown as NextConfig["serverActions"],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

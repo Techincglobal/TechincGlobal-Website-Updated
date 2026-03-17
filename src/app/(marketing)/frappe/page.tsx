@@ -107,6 +107,75 @@ export default function FrappePage() {
                     </div>
                 </Container>
             </section>
+            {/* Bench CLI & Deployment Core */}
+            <section className="section-padding bg-white border-y border-surface-border">
+                <Container>
+                    <FadeUp>
+                        <div className="text-center max-w-2xl mx-auto mb-12">
+                            <span className="text-xs font-semibold uppercase tracking-widest text-brand-teal">Management & DX</span>
+                            <h2 className="mt-2 text-display-sm font-bold text-text-primary">
+                                The Bench Framework CLI
+                            </h2>
+                            <p className="mt-4 text-sm text-text-secondary">
+                                Frappe relies on **Bench**, a unified command-line tool wrapping site environments, managing multi-tenant databases, and pushing app updates seamlessly.
+                            </p>
+                        </div>
+
+                        <div className="grid gap-6 md:grid-cols-3">
+                            {[
+                                { title: "App Packaging", desc: "Easily integrate custom logic inside standard Python packages inside existing sites.", cmd: "bench get-app [repo]" },
+                                { title: "Multitenancy", desc: "Run 100+ mapped unique domain sites using a single Bench setup with isolated DB ports.", cmd: "bench set-config [key] [val]" },
+                                { title: "Bench Console", desc: "Expose safe transactional repl interfaces to test methods directly using site domains context.", cmd: "bench --site [domain] console" }
+                            ].map((box) => (
+                                <div key={box.title} className="rounded-xl border border-surface-border p-5 bg-[#F9FBFC] hover:shadow-soft transition-all duration-200">
+                                    <span className="text-xs font-bold text-brand-blue">{box.title}</span>
+                                    <p className="mt-2 text-xs text-text-secondary">{box.desc}</p>
+                                    <div className="mt-4 p-2 rounded bg-slate-900 font-mono text-[10px] text-slate-300">
+                                        $ {box.cmd}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </FadeUp>
+                </Container>
+            </section>
+
+            {/* Real-time & Services grid */}
+            <section className="section-padding">
+                <Container>
+                    <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+                        <FadeUp className="lg:order-2">
+                            <div className="rounded-2xl border border-slate-800 bg-[#0B1120] p-6 text-slate-400 shadow-2xl">
+                                <span className="text-[10px] uppercase font-bold tracking-wider text-brand-teal">Node.js Sync streams</span>
+                                <h3 className="mt-2 text-lg font-bold text-white">Socket.IO & Redis Bus</h3>
+                                <p className="mt-3 text-xs leading-relaxed text-slate-400">
+                                    Frappe natively pushes transactional triggers from Python directly onto Redis PUB/SUB channels which Node.js emits instantly across open active client sockets.
+                                </p>
+                                <div className="mt-5 space-y-2">
+                                    <div className="flex items-center justify-between p-2 rounded bg-slate-800/50 border border-slate-800">
+                                        <span className="text-xs font-mono text-slate-300">redis_queue: default</span>
+                                        <span className="text-[10px] text-green-400 font-bold">● Active</span>
+                                    </div>
+                                    <div className="flex items-center justify-between p-2 rounded bg-slate-800/50 border border-slate-800">
+                                        <span className="text-xs font-mono text-slate-300">socket_io: push_message</span>
+                                        <span className="text-[10px] text-brand-teal font-bold">Connected</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </FadeUp>
+
+                        <FadeUp className="lg:order-1">
+                            <span className="text-xs font-semibold uppercase tracking-widest text-brand-blue">Component Ecosystem</span>
+                            <h2 className="mt-2 text-display-sm font-bold text-text-primary">
+                                Real-Time Streams Built-In
+                            </h2>
+                            <p className="mt-4 text-sm leading-relaxed text-text-secondary">
+                                Unlike monolithic stacks having to hook custom sockets, Frappe coordinates asynchronous flows using tightly bonded sidecar queues natively out of the box.
+                            </p>
+                        </FadeUp>
+                    </div>
+                </Container>
+            </section>
         </div>
     );
 }

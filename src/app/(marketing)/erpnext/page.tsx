@@ -103,6 +103,69 @@ export default function ERPNextPage() {
                     </div>
                 </Container>
             </section>
+            {/* ROI & Business stats */}
+            <section className="section-padding bg-slate-900 text-white border-y border-slate-800">
+                <Container>
+                    <FadeUp>
+                        <div className="grid gap-8 md:grid-cols-3 text-center">
+                            {[
+                                { value: "35%", label: "Faster Financial Close", desc: "Automated reconciliation & real-time GL updates reduce audit latency cycles." },
+                                { value: "42%", label: "Inventory Accuracy", desc: "Batch/Serial Tracking prevents stock overruns & minimizes obsolete carrying costs." },
+                                { value: "2.5x", label: "ROI Multiple", desc: "Average system payback achieved in under 12 months through OPEX reductions." }
+                            ].map((stat) => (
+                                <div key={stat.label} className="flex flex-col items-center">
+                                    <span className="text-display-md font-extrabold text-brand-teal">{stat.value}</span>
+                                    <p className="mt-1 text-sm font-bold text-white">{stat.label}</p>
+                                    <p className="mt-2 text-xs text-slate-400 max-w-xs">{stat.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </FadeUp>
+                </Container>
+            </section>
+
+            {/* Global & Multi-Company Core */}
+            <section className="section-padding bg-white">
+                <Container>
+                    <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+                        <FadeUp className="lg:order-1">
+                            <div className="rounded-2xl border border-surface-border bg-[#F9FBFC] p-6 shadow-soft space-y-4">
+                                <div className="flex items-center gap-2 border-b border-surface-border pb-3">
+                                    <div className="h-2 w-2 rounded-full bg-blue-500" />
+                                    <span className="text-xs font-semibold text-text-primary">Corporate Consolidation</span>
+                                </div>
+                                <div className="space-y-3">
+                                    {[
+                                        { title: "Multi-Currency", desc: "Update exchange rates triggers matching local ledger books instantly." },
+                                        { title: "Inter-Company Invoicing", desc: "Automatically create Purchase Invoices off corresponding Sales Invoices." },
+                                        { title: "Unified Group Dashboard", desc: "Consolidated balance sheets across 10+ legal branches seamlessly." }
+                                    ].map(row => (
+                                        <div key={row.title} className="p-3 bg-white border border-surface-border rounded-xl">
+                                            <span className="text-xs font-bold text-text-primary">{row.title}</span>
+                                            <p className="mt-0.5 text-[11px] text-text-secondary">{row.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </FadeUp>
+
+                        <FadeUp className="lg:order-2">
+                            <span className="text-xs font-semibold uppercase tracking-widest text-brand-blue">Global Scale</span>
+                            <h2 className="mt-2 text-display-sm font-bold text-text-primary">
+                                Multi-Company Ledger Orchestration
+                            </h2>
+                            <p className="mt-4 text-sm leading-relaxed text-text-secondary">
+                                ERPNext natively supports tree-based Company architectures. Set up Parent and Child legal entities with fully independent charts of accounts, while enjoying absolute consolidated visibility.
+                            </p>
+                            <div className="mt-6">
+                                <Button asChild size="sm">
+                                    <Link href="/contact">Configure Multi-Company</Link>
+                                </Button>
+                            </div>
+                        </FadeUp>
+                    </div>
+                </Container>
+            </section>
         </div>
     );
 }

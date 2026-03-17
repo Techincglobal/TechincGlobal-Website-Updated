@@ -25,6 +25,141 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
+function getIndustryVisualMockup(slug: string) {
+    if (slug === "manufacturing") {
+        return (
+            <div className="rounded-2xl border border-surface-border bg-white p-6 shadow-soft space-y-4">
+                <div className="flex items-center justify-between border-b border-surface-border pb-3">
+                    <span className="text-xs font-bold text-text-primary">Live Shop Floor Monitor</span>
+                    <span className="text-[10px] bg-green-50 text-green-600 px-2 py-0.5 rounded-full font-medium">Active</span>
+                </div>
+                <div className="space-y-2">
+                    {[
+                        { name: "Cnc Router 01", status: "Running", eff: "92%" },
+                        { name: "Laser Cutter 02", status: "Maintenance", eff: "0%" },
+                        { name: "Assembly Line B", status: "Running", eff: "88%" }
+                    ].map(m => (
+                        <div key={m.name} className="p-3 bg-[#F9FBFC] rounded-xl border border-surface-border flex items-center justify-between">
+                            <div>
+                                <p className="text-xs font-bold text-text-primary">{m.name}</p>
+                                <p className="text-[10px] text-text-secondary">{m.status}</p>
+                            </div>
+                            <span className="text-sm font-bold text-brand-blue">{m.eff}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
+    if (slug === "distribution-logistics") {
+        return (
+            <div className="rounded-2xl border border-surface-border bg-white p-6 shadow-soft">
+                <div className="border-b border-surface-border pb-3 mb-4">
+                    <span className="text-xs font-bold text-text-primary">Fleet & Dispatch Streams</span>
+                </div>
+                <div className="aspect-video bg-slate-100 rounded-xl relative overflow-hidden border border-surface-border">
+                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524334228333-0f6db392f8a1?auto=format&fit=crop&w=800&q=40')] bg-cover bg-center opacity-30" />
+                    <div className="absolute top-4 left-4 p-2 bg-white rounded-lg shadow-sm border border-surface-border flex items-center gap-2">
+                        <div className="h-2 w-2 rounded-full bg-blue-500 animate-ping" />
+                        <span className="text-[10px] font-bold">Truck #42 - En-route</span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (slug === "retail-ecommerce") {
+        return (
+            <div className="rounded-2xl border border-surface-border bg-white p-6 shadow-soft space-y-4">
+                <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-text-primary">Omnichannel Live Sales</span>
+                    <span className="text-xs font-bold text-brand-teal">LKR 142K+</span>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                    {[{ l: "Online orders", v: "14" }, { l: "Store pickup", v: "8" }].map(c => (
+                        <div key={c.l} className="p-3 bg-[#F9FBFC] rounded-lg border border-surface-border text-center">
+                            <span className="text-xl font-bold text-brand-blue">{c.v}</span>
+                            <p className="text-[10px] text-text-secondary mt-1">{c.l}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
+    if (slug === "healthcare") {
+        return (
+            <div className="rounded-2xl border border-surface-border bg-white p-6 shadow-soft space-y-4">
+                <div className="flex items-center justify-between border-b border-surface-border pb-3">
+                    <span className="text-xs font-bold text-text-primary">EHR Patient Records</span>
+                    <span className="text-[10px] text-brand-blue border border-brand-blue/30 px-2 py-0.5 rounded font-medium">Decrypted</span>
+                </div>
+                <div className="space-y-2">
+                    {[
+                        { d: "Body Temp", v: "98.4°F", s: "Normal" },
+                        { d: "Pulse Rate", v: "72 bpm", s: "Stable" },
+                        { d: "Blood Pressure", v: "120/80", s: "Normal" }
+                    ].map(r => (
+                        <div key={r.d} className="p-3 bg-[#F9FBFC] rounded-xl border border-surface-border flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <div className="h-2 w-2 rounded-full bg-brand-teal" />
+                                <span className="text-xs text-text-secondary">{r.d}</span>
+                            </div>
+                            <span className="text-xs font-bold text-text-primary">{r.v}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
+    if (slug === "professional-services") {
+        return (
+            <div className="rounded-2xl border border-surface-border bg-white p-6 shadow-soft space-y-4">
+                <div className="flex items-center justify-between border-b border-surface-border pb-3">
+                    <span className="text-xs font-bold text-text-primary">Project Accounting</span>
+                    <span className="text-[10px] text-brand-teal font-bold">On Track</span>
+                </div>
+                <div className="space-y-4 pt-2">
+                    <div>
+                        <div className="flex items-center justify-between mb-1">
+                            <span className="text-[11px] text-text-secondary">Budget Utilization</span>
+                            <span className="text-[11px] font-bold text-brand-blue">74%</span>
+                        </div>
+                        <div className="relative h-2 rounded-full bg-slate-100 overflow-hidden border border-surface-border">
+                            <div className="absolute top-0 left-0 bottom-0 bg-brand-blue w-3/4 rounded-full" />
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                        <div className="p-2.5 bg-[#F9FBFC] rounded-lg border border-surface-border">
+                            <span className="text-[10px] text-text-secondary">Billable Hours</span>
+                            <p className="text-sm font-bold text-text-primary">142.5 h</p>
+                        </div>
+                        <div className="p-2.5 bg-[#F9FBFC] rounded-lg border border-surface-border">
+                            <span className="text-[10px] text-text-secondary">Profit Margin</span>
+                            <p className="text-sm font-bold text-green-600">22.4%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // Default general dashboard mockup
+    return (
+        <div className="rounded-2xl border border-surface-border bg-white p-6 shadow-soft">
+            <div className="flex items-center gap-2 mb-4 border-b border-surface-border pb-3">
+                <div className="h-3 w-3 rounded-full bg-brand-blue" />
+                <span className="text-xs font-bold text-text-primary">Operational Status Dashboard</span>
+            </div>
+            <div className="h-40 bg-[#F9FBFC] rounded-xl border border-surface-border border-dashed flex items-center justify-center">
+                <span className="text-xs text-text-muted">Linked datasets fully operating online</span>
+            </div>
+        </div>
+    );
+}
+
 export default async function IndustryDetailPage({ params }: Props) {
     const { slug } = await params;
     const industry = industries.find((i) => i.slug === slug);
@@ -76,45 +211,48 @@ export default async function IndustryDetailPage({ params }: Props) {
                 )}
             </section>
 
-            {/* Challenges */}
+            {/* Challenges & Benefits (Visualised) */}
             <section className="section-padding" aria-labelledby="challenges-heading">
                 <Container>
-                    <div className="grid gap-12 lg:grid-cols-2">
+                    <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
                         <FadeUp>
-                            <h2 id="challenges-heading" className="text-display-sm font-bold text-text-primary">
-                                Industry Challenges We Solve
-                            </h2>
-                            <ul className="mt-6 space-y-4">
-                                {industry.challenges.map((challenge, i) => (
-                                    <li key={i} className="flex items-start gap-3">
-                                        <span className="mt-1 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-red-100 text-red-500">
-                                            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-                                            </svg>
-                                        </span>
-                                        <span className="text-sm leading-relaxed text-text-secondary">{challenge}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                            <div>
+                                <h2 id="challenges-heading" className="text-display-sm font-bold text-text-primary">
+                                    Industry Challenges We Solve
+                                </h2>
+                                <ul className="mt-6 space-y-4 border-b border-surface-border pb-8 mb-8">
+                                    {industry.challenges.map((challenge, i) => (
+                                        <li key={i} className="flex items-start gap-3">
+                                            <span className="mt-1 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-red-100 text-red-500">
+                                                <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                                                </svg>
+                                            </span>
+                                            <span className="text-sm leading-relaxed text-text-secondary">{challenge}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <h2 className="text-display-sm font-bold text-text-primary">
+                                    Outcomes You Can Expect
+                                </h2>
+                                <ul className="mt-6 space-y-4">
+                                    {industry.benefits.map((benefit, i) => (
+                                        <li key={i} className="flex items-start gap-3">
+                                            <span className="mt-1 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-blue-pale text-brand-blue">
+                                                <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </span>
+                                            <span className="text-sm leading-relaxed text-text-secondary">{benefit}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </FadeUp>
 
-                        {/* Benefits */}
                         <FadeUp delay={0.15}>
-                            <h2 className="text-display-sm font-bold text-text-primary">
-                                Outcomes You Can Expect
-                            </h2>
-                            <ul className="mt-6 space-y-4">
-                                {industry.benefits.map((benefit, i) => (
-                                    <li key={i} className="flex items-start gap-3">
-                                        <span className="mt-1 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-blue-pale text-brand-blue">
-                                            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                            </svg>
-                                        </span>
-                                        <span className="text-sm leading-relaxed text-text-secondary">{benefit}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                            {getIndustryVisualMockup(slug)}
                         </FadeUp>
                     </div>
                 </Container>
