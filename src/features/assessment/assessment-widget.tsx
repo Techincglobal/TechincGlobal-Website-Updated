@@ -10,14 +10,18 @@ import { assessmentQuestions } from "@/content/assessment";
 type Answer = Record<number, string>;
 
 function ScoreResult({ answers }: { answers: Answer }) {
-    // Calculate score: 3 = Ready, 2 = Partially Ready, 1 = Early Stage
-    const values = Object.values(answers);
-    const total = values.reduce((sum, a) => {
-        if (a.startsWith("3")) return sum + 3;
-        if (a.startsWith("2")) return sum + 2;
-        return sum + 1;
+    // Calculate score dynamically based on number of options
+    const total = Object.entries(answers).reduce((sum, [qi, answer]) => {
+        const score = parseInt(answer.split("-")[0], 10);
+        return sum + (isNaN(score) ? 1 : score);
     }, 0);
-    const maxScore = values.length * 3;
+
+    const maxScore = Object.entries(answers).reduce((sum, [qi]) => {
+        const question = assessmentQuestions.find((q) => q.id === Number(qi));
+        if (!question) return sum;
+        const maxOpt = Math.max(...question.options.map(o => parseInt(o.value.split("-")[0], 10)));
+        return sum + (maxOpt > 0 ? maxOpt : 3);
+    }, 0);
     const pct = Math.round((total / maxScore) * 100);
 
     let tier: { title: string; color: string; bg: string; desc: string; cta: string };
@@ -64,12 +68,13 @@ function ScoreResult({ answers }: { answers: Answer }) {
                 <div className="mt-4 space-y-3">
                     {Object.entries(answers).map(([qi, answer]) => {
                         const question = assessmentQuestions.find((q) => q.id === Number(qi));
-                        const score = answer.startsWith("3") ? 3 : answer.startsWith("2") ? 2 : 1;
+                        const score = parseInt(answer.split("-")[0], 10);
+                        const maxOpt = question ? Math.max(...question.options.map(o => parseInt(o.value.split("-")[0], 10))) : 3;
                         return question ? (
                             <div key={qi} className="flex items-center justify-between gap-4">
                                 <p className="flex-1 text-sm text-text-secondary">{question.shortTitle}</p>
                                 <div className="flex gap-1">
-                                    {[1, 2, 3].map((s) => (
+                                    {Array.from({ length: maxOpt }, (_, i) => i + 1).map((s) => (
                                         <span
                                             key={s}
                                             className={`h-2.5 w-6 rounded-full ${s <= score ? "bg-brand-blue" : "bg-surface-border"}`}
